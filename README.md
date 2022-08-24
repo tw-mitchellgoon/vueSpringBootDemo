@@ -18,3 +18,5 @@ cd vue-frontend
 yarn install
 npm run serve
 ```
+
+# Tech Stack

@@ -1,20 +1,22 @@
 <template>
   <div class="container">
     <ul>
-      <ToDoItem
-        v-for="item in store.state.toDoList"
-        :key="item.id"
-      >
-        <template v-slot:title>
-          {{ item.title }}
-        </template>
-        <template v-slot:completed>
-          <input
-            type="checkbox"
-            :checked="item.completed"
-          />
-        </template>
-      </ToDoItem>
+      <span>
+        <ToDoItem
+          v-for="item in store.state.toDoList"
+          :key="item.id"
+        >
+          <template v-slot:title>
+            {{ item.title }}
+          </template>
+          <template v-slot:completed>
+            <input
+              type="checkbox"
+              :checked="item.completed"
+            />
+          </template>
+        </ToDoItem>
+      </span>
     </ul>
     <button>Add Task</button>
   </div>

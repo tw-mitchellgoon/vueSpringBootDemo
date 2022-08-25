@@ -1,33 +1,38 @@
 <template>
   <div class="container">
     <ul>
-      <li>
-        <span
-          ><p>Task 1</p>
-          <input type="checkbox" />
-        </span>
-      </li>
-      <li>
-        <span
-          ><p>Task 2</p>
-          <input type="checkbox" />
-        </span>
-      </li>
-      <li>
-        <span
-          ><p>Task 3</p>
-          <input type="checkbox" />
-        </span>
-      </li>
+      <ToDoItem
+        v-for="item in store.state.toDoList"
+        :key="item.id"
+      >
+        <template v-slot:title>
+          {{ item.title }}
+        </template>
+        <template v-slot:completed>
+          <input
+            type="checkbox"
+            :checked="item.completed"
+          />
+        </template>
+      </ToDoItem>
     </ul>
     <button>Add Task</button>
   </div>
 </template>
 
 <script>
+import ToDoItem from "./ToDoItem.vue";
+import { store } from "../store/store";
 export default {
   name: "ToDo",
-  setup() {},
+  components: {
+    ToDoItem,
+  },
+  setup() {
+    return {
+      store,
+    };
+  },
 };
 </script>
 

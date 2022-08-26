@@ -1,23 +1,21 @@
 <template>
   <div class="container">
-    <ul>
-      <span>
-        <ToDoItem
-          v-for="item in store.state.toDoList"
-          :key="item.id"
-        >
-          <template v-slot:title>
-            {{ item.title }}
-          </template>
-          <template v-slot:completed>
-            <input
-              type="checkbox"
-              :checked="item.completed"
-            />
-          </template>
-        </ToDoItem>
-      </span>
-    </ul>
+    <div>
+      <ToDoItem
+        v-for="item in store.state.toDoList"
+        :key="item.id"
+      >
+        <template v-slot:title>
+          {{ item.title }}
+        </template>
+        <template v-slot:completed>
+          <input
+            type="checkbox"
+            :checked="item.completed"
+          />
+        </template>
+      </ToDoItem>
+    </div>
     <button>Add Task</button>
   </div>
 </template>
@@ -30,6 +28,7 @@ export default {
   components: {
     ToDoItem,
   },
+  methods: {},
   setup() {
     return {
       store,

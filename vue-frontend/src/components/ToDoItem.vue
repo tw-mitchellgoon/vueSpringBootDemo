@@ -1,9 +1,9 @@
 <template>
   <div class="item">
-    <div class="title"><slot name="title" /></div>
-    <div class="completed">
+    <span class="title"><slot name="title" /></span>
+    <span class="completed">
       <slot name="completed"></slot>
-    </div>
+    </span>
   </div>
 </template>
 

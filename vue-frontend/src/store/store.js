@@ -1,12 +1,7 @@
-import { reactive } from "vue";
-import { testList } from "./toDoStore";
+import { toDoList } from "./toDoStore";
+// import { toDoList } from "./testListStore";
+import { createStore } from "vuex";
 
-class Store {
-  constructor() {
-    this.state = reactive({
-      toDoList: testList,
-    });
-  }
-}
-
-export const store = new Store();
+export const store = createStore({
+  modules: { toDoList },
+});

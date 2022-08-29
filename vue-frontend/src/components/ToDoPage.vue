@@ -16,7 +16,12 @@
         </template>
       </ToDoItem>
     </div>
-    <button>Add Task</button>
+    <input
+      type="text"
+      name="taskInput"
+      id="taskInput"
+    />
+    <button @click="addItem">Add Task</button>
   </div>
 </template>
 
@@ -41,6 +46,11 @@ export default {
     return {
       toDoList,
     };
+  },
+  methods: {
+    async addItem() {
+      alert("Item Added");
+    },
   },
 };
 </script>

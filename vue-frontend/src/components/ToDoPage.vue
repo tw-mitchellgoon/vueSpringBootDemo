@@ -21,7 +21,9 @@
         type="text"
         name="taskInput"
         id="taskInput"
+        v-model="taskInput"
       />
+
       <button>Add Task</button>
     </form>
   </div>
@@ -31,27 +33,33 @@
 import ToDoItem from "./ToDoItem.vue";
 import { useStore } from "vuex";
 
-import { computed, onMounted } from "vue";
+import { ref, computed, onMounted } from "vue";
 export default {
   name: "ToDo",
   components: {
     ToDoItem,
   },
+
   setup() {
     const store = useStore();
+    const taskInput = ref("");
     onMounted(() => {
       store.dispatch("toDoList/fetch");
     });
     const toDoList = computed(() => {
       return store.state.toDoList.all;
     });
-    const addItem = () => {
-      store.dispatch("toDoList/addItem");
-      console.log(store.state.toDoList.all);
+    const addItem = (e) => {
+      store.dispatch("toDoList/addItem", {
+        toDoItem: e.target.taskInput.value,
+      });
+      taskInput.value = "";
     };
+
     return {
       toDoList,
       addItem,
+      taskInput,
     };
   },
 };

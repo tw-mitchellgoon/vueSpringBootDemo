@@ -23,9 +23,8 @@ export const toDoList = {
       ).data;
       ctx.commit("setToDoList", res);
     },
-    async addItem(ctx) {
-      const res = "new item added";
-      ctx.commit("addToDoItem", res);
+    async addItem(ctx, { toDoItem }) {
+      ctx.commit("addToDoItem", toDoItem);
     },
   },
 };

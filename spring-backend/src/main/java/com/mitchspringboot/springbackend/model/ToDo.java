@@ -20,6 +20,6 @@ public class ToDo {
     @Column(name = "title", nullable = false)
     private String title;
 
-    @Column(name = "compelted", nullable = false)
+    @Column(name = "completed", nullable = false)
     private Boolean completed;
 }

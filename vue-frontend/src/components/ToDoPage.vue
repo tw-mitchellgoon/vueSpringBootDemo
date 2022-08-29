@@ -16,12 +16,14 @@
         </template>
       </ToDoItem>
     </div>
-    <input
-      type="text"
-      name="taskInput"
-      id="taskInput"
-    />
-    <button @click="addItem">Add Task</button>
+    <form @submit.prevent="addItem">
+      <input
+        type="text"
+        name="taskInput"
+        id="taskInput"
+      />
+      <button>Add Task</button>
+    </form>
   </div>
 </template>
 
@@ -43,14 +45,14 @@ export default {
     const toDoList = computed(() => {
       return store.state.toDoList.all;
     });
+    const addItem = () => {
+      store.dispatch("toDoList/addItem");
+      console.log(store.state.toDoList.all);
+    };
     return {
       toDoList,
+      addItem,
     };
-  },
-  methods: {
-    async addItem() {
-      alert("Item Added");
-    },
   },
 };
 </script>

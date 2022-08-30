@@ -51,9 +51,12 @@ export default {
     });
     const addItem = (e) => {
       store.dispatch("toDoList/addItem", {
-        toDoItem: e.target.taskInput.value,
+        title: e.target.taskInput.value,
       });
       taskInput.value = "";
+      setTimeout(() => {
+        store.dispatch("toDoList/fetch");
+      }, 100);
     };
 
     return {

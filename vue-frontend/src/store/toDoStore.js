@@ -8,13 +8,6 @@ export const toDoList = {
     setToDoList(state, toDoList) {
       state.all = toDoList;
     },
-    addToDoItem(state, toDoItem) {
-      state.all.push({
-        id: state.all.length,
-        title: toDoItem,
-        completed: false,
-      });
-    },
   },
   actions: {
     async fetch(ctx) {
@@ -23,8 +16,9 @@ export const toDoList = {
       ).data;
       ctx.commit("setToDoList", res);
     },
-    async addItem(ctx, { toDoItem }) {
-      ctx.commit("addToDoItem", toDoItem);
+    addItem(ctx, toDoItem) {
+      const post = ToDoService.addToDo(toDoItem);
+      ctx.commit("setToDoList", post);
     },
   },
 };

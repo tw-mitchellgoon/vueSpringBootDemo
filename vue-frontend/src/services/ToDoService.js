@@ -10,7 +10,11 @@ class ToDoService {
   addToDo(toDoItem) {
     return axios
       .post(`${TODO_API_BASE_URL}todoadd`, toDoItem)
-      .then((res) => console.log(res))
+      .then((res) =>
+        console.log(
+          `Task created, Status Code: ${res.status}`
+        )
+      )
       .catch((err) => console.log(err));
   }
 }

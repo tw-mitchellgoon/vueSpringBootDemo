@@ -17,6 +17,7 @@ public interface ToDoRepository extends JpaRepository<ToDo, Integer> {
     @Transactional
     @Modifying
     @Query(nativeQuery = true, value = "INSERT INTO todolist (title, completed) values (:title, :completed)")
-    void ToDoAdd(@Param("title") String title,
+    void ToDoAdd(
+            @Param("title") String title,
             @Param("completed") Boolean completed);
 }

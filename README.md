@@ -1,20 +1,12 @@
-# vueSpringBootDemo
+# To Do List - Vue/SpringBoot full stack demo
 
-Vue/SpringBoot full stack demo
+Simple To Do list, added tasks are saved in JPA in backend
 
-Simple to do list, added tasks are saved in JPA in backend
+# Tech Stack
 
-# Backend - SpringBoot
-
-Heroku API - https://vue-springboot-backend.herokuapp.com/api/todolist
-
-To run it locally:
-Compile JAR via Maven in IDE, then to run backend:
-
-```
-cd spring-backend/target
-java -jar (JAR file here)
-```
+- Frontend: VueJS
+- Backend: Spring Boot, JPA
+- Deployed to: Netlify (Frontend), Heroku (Backend)
 
 # Frontend - Vue.JS
 
@@ -27,8 +19,14 @@ yarn install
 npm run serve
 ```
 
-# Tech Stack
+# Backend - SpringBoot
 
-- Frontend: VueJS
-- Backend: Spring Boot, JPA
-- Deployed to: Netlify (Frontend), Heroku (Backend)
+Heroku API - https://vue-springboot-backend.herokuapp.com/api/todolist
+
+To run it locally:
+Compile JAR via Maven in IDE, then to run backend:
+
+```
+cd spring-backend/target
+java -jar (JAR file here)
+```

@@ -6,8 +6,9 @@ Simple to do list, added tasks are saved in JPA in backend
 
 # Backend - SpringBoot
 
-Heroku App - https://vue-springboot-backend.herokuapp.com/api/todolist
+Heroku API - https://vue-springboot-backend.herokuapp.com/api/todolist
 
+To run it locally:
 Compile JAR via Maven in IDE, then to run backend:
 
 ```
@@ -17,6 +18,9 @@ java -jar (JAR file here)
 
 # Frontend - Vue.JS
 
+Frontend App - https://vuespring-todo.netlify.app/
+
+To run it locally:
 ```
 cd vue-frontend
 yarn install
@@ -27,3 +31,4 @@ npm run serve
 
 - Frontend: VueJS
 - Backend: Spring Boot, JPA
+- Deployed to: Netlify (Frontend), Heroku (Backend)

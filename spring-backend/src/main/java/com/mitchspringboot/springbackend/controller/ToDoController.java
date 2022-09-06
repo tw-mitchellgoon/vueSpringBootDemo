@@ -15,18 +15,29 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.mitchspringboot.springbackend.model.ToDo;
 import com.mitchspringboot.springbackend.repository.ToDoRepository;
+import com.mitchspringboot.springbackend.service.ToDoService;
 
 @RestController
 @CrossOrigin(origins = "https://vuespring-todo.netlify.app/")
+// @CrossOrigin(origins = "*")
 @RequestMapping("/api")
 public class ToDoController {
     @Autowired
     private ToDoRepository toDoRepository;
 
+    private final ToDoService toDoService;
+
+    public ToDoController(ToDoService toDoService) {
+        this.toDoService = toDoService;
+    }
+
     @GetMapping("/todolist")
     public List<ToDo> fetchToDo() {
-        return toDoRepository.findAll();
+        return toDoService.getAllToDo();
     }
+    // public List<ToDo> fetchToDo() {
+    // return toDoRepository.findAll();
+    // }
 
     @PostMapping(path = "/todoadd", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ToDo> addToDo(@RequestBody ToDo newToDo) throws Exception {

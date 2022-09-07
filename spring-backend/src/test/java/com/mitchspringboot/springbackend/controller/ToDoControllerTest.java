@@ -5,6 +5,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -12,6 +13,8 @@ import com.mitchspringboot.springbackend.model.ToDo;
 import com.mitchspringboot.springbackend.service.ToDoService;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -61,5 +64,15 @@ public class ToDoControllerTest {
         mockMvc.perform(get(TODO_REQUEST_PREFIX + "todolist/")).andExpect(status().isOk())
                 .andExpect(jsonPath("$.[0].title").value(toDoTitle1))
                 .andExpect(jsonPath("$.[1].title").value(toDoTitle2));
+    }
+
+    @Test
+    public void shouldAddToDoItem() throws Exception {
+        String toDoAddRequestJson = String.format(TODO_REQUEST_BODY, title, completed);
+        when(toDoService.addToDo(eq(title), eq(completed))).thenReturn(toDoItem);
+        mockMvc.perform(post(TODO_REQUEST_PREFIX + "todoadd/").content(toDoAddRequestJson)
+                .contentType(MediaType.APPLICATION_JSON)).andExpect(status().isCreated());
+
+        verify(toDoService).addToDo(title, completed);
     }
 }

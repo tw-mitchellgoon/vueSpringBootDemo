@@ -19,7 +19,7 @@ import com.mitchspringboot.springbackend.service.ToDoService;
 
 @RestController
 @CrossOrigin(origins = "https://vuespring-todo.netlify.app/")
-// @CrossOrigin(origins = "*")
+// @CrossOrigin(origins = "http://localhost:3000/")
 @RequestMapping("/api")
 public class ToDoController {
     @Autowired

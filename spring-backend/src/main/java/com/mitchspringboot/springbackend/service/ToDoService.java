@@ -17,9 +17,11 @@ public class ToDoService {
         this.toDoRepository = toDoRepository;
     }
 
-    // public ToDo addToDo() {
-
-    // }
+    public ToDo addToDo(String title, Boolean completed) {
+        ToDo toDoItem = new ToDo((int) Math.random() * 100, title, completed);
+        toDoRepository.ToDoAdd(toDoItem.getTitle(), toDoItem.getCompleted());
+        return toDoItem;
+    }
 
     public List<ToDo> getAllToDo() {
         return toDoRepository.ToDoList();

@@ -1,6 +1,7 @@
 package com.mitchspringboot.springbackend.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.when;
 
 import java.util.List;
@@ -38,5 +39,16 @@ public class ToDoServiceTest {
         assertEquals(id, toDoList.get(0).getId());
         assertEquals(title, toDoList.get(0).getTitle());
         assertEquals(completed, toDoList.get(0).getCompleted());
+    }
+
+    @Test
+    public void shouldCreateNewToDoItem() {
+        when(toDoRepository.ToDoAdd(title, completed)).thenReturn(expectedToDo);
+
+        ToDo actualToDo = toDoService.addToDo(title, completed);
+
+        assertNotNull(expectedToDo.getId());
+        assertEquals(expectedToDo.getTitle(), actualToDo.getTitle());
+        assertEquals(expectedToDo.getCompleted(), actualToDo.getCompleted());
     }
 }

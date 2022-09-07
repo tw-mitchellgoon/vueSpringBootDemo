@@ -2,6 +2,7 @@ package com.mitchspringboot.springbackend.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 
 import java.util.List;
@@ -43,7 +44,7 @@ public class ToDoServiceTest {
 
     @Test
     public void shouldCreateNewToDoItem() {
-        when(toDoRepository.ToDoAdd(title, completed)).thenReturn(expectedToDo);
+        when(toDoRepository.ToDoAdd(eq(title), eq(completed))).thenReturn(expectedToDo);
 
         ToDo actualToDo = toDoService.addToDo(title, completed);
 

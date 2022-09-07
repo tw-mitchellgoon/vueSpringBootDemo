@@ -1,17 +1,16 @@
 import axios from "axios";
 
-const TODO_API_BASE_URL =
-  "https://vue-springboot-backend.herokuapp.com/api/";
-// "http://localhost:8081/api/";
+const apiBaseUrl =
+  process.env.VUE_APP_TODO_API_BASE_URL;
 
 class ToDoService {
   getToDoList() {
-    return axios.get(`${TODO_API_BASE_URL}todolist`);
+    return axios.get(`${apiBaseUrl}todolist`);
   }
 
   addToDo(toDoItem) {
     return axios
-      .post(`${TODO_API_BASE_URL}todoadd`, toDoItem)
+      .post(`${apiBaseUrl}todoadd`, toDoItem)
       .then((res) =>
         console.log(
           `Task created, Status Code: ${res.status}`

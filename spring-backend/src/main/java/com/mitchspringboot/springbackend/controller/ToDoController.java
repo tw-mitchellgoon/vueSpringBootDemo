@@ -38,7 +38,7 @@ public class ToDoController {
     // return toDoRepository.findAll();
     // }
 
-    @PostMapping("/todoadd")
+    @PostMapping(path = "/todoadd", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ToDo> addToDo(@RequestBody ToDo newToDo) {
         toDoService.addToDo(newToDo.getTitle(), false);
         return new ResponseEntity<ToDo>(newToDo, HttpStatus.CREATED);

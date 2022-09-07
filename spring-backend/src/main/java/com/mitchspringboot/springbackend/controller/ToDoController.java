@@ -14,17 +14,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mitchspringboot.springbackend.model.ToDo;
-import com.mitchspringboot.springbackend.repository.ToDoRepository;
 import com.mitchspringboot.springbackend.service.ToDoService;
 
 @RestController
 @CrossOrigin(origins = "https://vuespring-todo.netlify.app/")
-// @CrossOrigin(origins = "http://localhost:3000/")
+// @CrossOrigin(origins = "*", allowedHeaders = "*", exposedHeaders = "*")
 @RequestMapping("/api")
 public class ToDoController {
     @Autowired
     private final ToDoService toDoService;
-    // private ToDoRepository toDoRepository;
 
     public ToDoController(ToDoService toDoService) {
         this.toDoService = toDoService;
@@ -34,21 +32,11 @@ public class ToDoController {
     public List<ToDo> fetchToDo() {
         return toDoService.getAllToDo();
     }
-    // public List<ToDo> fetchToDo() {
-    // return toDoRepository.findAll();
-    // }
 
     @PostMapping(path = "/todoadd", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ToDo> addToDo(@RequestBody ToDo newToDo) {
+    public ResponseEntity<ToDo> addToDo(@RequestBody ToDo newToDo) throws Exception {
         toDoService.addToDo(newToDo.getTitle(), false);
         return new ResponseEntity<ToDo>(newToDo, HttpStatus.CREATED);
     }
 
-    // @PostMapping(path = "/todoadd", consumes = MediaType.APPLICATION_JSON_VALUE,
-    // produces = MediaType.APPLICATION_JSON_VALUE)
-    // public ResponseEntity<ToDo> addToDo(@RequestBody ToDo newToDo) throws
-    // Exception {
-    // toDoRepository.ToDoAdd(newToDo.getTitle(), false);
-    // return new ResponseEntity<ToDo>(newToDo, HttpStatus.CREATED);
-    // }
 }

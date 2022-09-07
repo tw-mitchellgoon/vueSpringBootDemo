@@ -42,15 +42,16 @@ public class ToDoServiceTest {
         assertEquals(completed, toDoList.get(0).getCompleted());
     }
 
-    // @Test
-    // public void shouldCreateNewToDoItem() {
-    // when(toDoRepository.ToDoAdd(eq(title),
-    // eq(completed))).thenReturn(expectedToDo);
+    @Test
+    public void shouldCreateNewToDoItem() {
+        when(toDoRepository.ToDoAdd(eq(title),
+                eq(completed))).thenReturn(null);
 
-    // ToDo actualToDo = toDoService.addToDo(title, completed);
+        ToDo actualToDo = toDoService.addToDo(title, completed);
 
-    // assertNotNull(expectedToDo.getId());
-    // assertEquals(expectedToDo.getTitle(), actualToDo.getTitle());
-    // assertEquals(expectedToDo.getCompleted(), actualToDo.getCompleted());
-    // }
+        System.out.println(List.of(expectedToDo.getId(), expectedToDo.getTitle(), expectedToDo.getCompleted()));
+        assertNotNull(expectedToDo.getId());
+        assertEquals(expectedToDo.getTitle(), actualToDo.getTitle());
+        assertEquals(expectedToDo.getCompleted(), actualToDo.getCompleted());
+    }
 }

@@ -12,7 +12,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import com.mitchspringboot.springbackend.model.ToDo;
 import com.mitchspringboot.springbackend.service.ToDoService;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;

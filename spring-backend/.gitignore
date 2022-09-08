@@ -34,4 +34,4 @@ build/
 
 
 ### Spring Boot App properties ###
-application-local.properties
+# application-local.properties

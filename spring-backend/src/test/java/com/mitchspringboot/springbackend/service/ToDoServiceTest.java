@@ -57,7 +57,6 @@ public class ToDoServiceTest {
     @Test
     public void shouldBeChangedToCompletedWhenTrue() {
         when(toDoRepository.ToDoChangeCompletedStatus(eq(id), eq(completed))).thenReturn(null);
-        when(toDoRepository.GetToDoStatusById(eq(id))).thenReturn(!completed);
         when(toDoRepository.GetToDoById(eq(id))).thenReturn(new ToDo(id, title, !completed));
 
         ToDo updatedToDo = toDoService.changeCompletedStatus(mockToDo);

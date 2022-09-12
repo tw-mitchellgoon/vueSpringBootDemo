@@ -23,6 +23,12 @@ public class ToDoService {
         return toDoItem;
     }
 
+    public ToDo changeCompletedStatus(ToDo toDo) {
+        toDoRepository.ToDoChangeCompletedStatus(toDo.getId(), !toDo.getCompleted());
+        ToDo updatedToDoItem = toDoRepository.GetToDoById(toDo.getId());
+        return updatedToDoItem;
+    }
+
     public List<ToDo> getAllToDo() {
         return toDoRepository.ToDoList();
     }

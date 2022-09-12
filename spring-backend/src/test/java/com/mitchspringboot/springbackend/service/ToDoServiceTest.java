@@ -29,11 +29,11 @@ public class ToDoServiceTest {
     private final String title = "Task " + id;
     private final Boolean completed = false;
 
-    private final ToDo expectedToDo = new ToDo(id, title, completed);
+    private final ToDo mockToDo = new ToDo(id, title, completed);
 
     @Test
     public void shouldGetAllToDoItems() {
-        when(toDoRepository.ToDoList()).thenReturn(List.of(expectedToDo));
+        when(toDoRepository.ToDoList()).thenReturn(List.of(mockToDo));
 
         List<ToDo> toDoList = toDoService.getAllToDo();
         assertEquals(1, toDoList.size());
@@ -44,14 +44,25 @@ public class ToDoServiceTest {
 
     @Test
     public void shouldCreateNewToDoItem() {
-        when(toDoRepository.ToDoAdd(eq(title),
-                eq(completed))).thenReturn(null);
+        when(toDoRepository.ToDoAdd(eq(title), eq(completed))).thenReturn(null);
 
         ToDo actualToDo = toDoService.addToDo(title, completed);
 
-        System.out.println(List.of(expectedToDo.getId(), expectedToDo.getTitle(), expectedToDo.getCompleted()));
-        assertNotNull(expectedToDo.getId());
-        assertEquals(expectedToDo.getTitle(), actualToDo.getTitle());
-        assertEquals(expectedToDo.getCompleted(), actualToDo.getCompleted());
+        System.out.println(List.of(mockToDo.getId(), mockToDo.getTitle(), mockToDo.getCompleted()));
+        assertNotNull(mockToDo.getId());
+        assertEquals(mockToDo.getTitle(), actualToDo.getTitle());
+        assertEquals(mockToDo.getCompleted(), actualToDo.getCompleted());
+    }
+
+    @Test
+    public void shouldBeChangedToCompletedWhenTrue() {
+        when(toDoRepository.ToDoChangeCompletedStatus(eq(id), eq(completed))).thenReturn(null);
+        when(toDoRepository.GetToDoStatusById(eq(id))).thenReturn(!completed);
+        when(toDoRepository.GetToDoById(eq(id))).thenReturn(new ToDo(id, title, !completed));
+
+        ToDo updatedToDo = toDoService.changeCompletedStatus(mockToDo);
+
+        assertEquals(!mockToDo.getCompleted(), updatedToDo.getCompleted());
+
     }
 }

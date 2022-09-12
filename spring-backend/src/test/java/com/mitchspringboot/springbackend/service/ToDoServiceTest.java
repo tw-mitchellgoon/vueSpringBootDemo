@@ -55,7 +55,7 @@ public class ToDoServiceTest {
     }
 
     @Test
-    public void shouldBeChangedToCompletedWhenTrue() {
+    public void shouldBeChangedWhenStatusIsModified() {
         when(toDoRepository.ToDoChangeCompletedStatus(eq(id), eq(completed))).thenReturn(null);
         when(toDoRepository.GetToDoById(eq(id))).thenReturn(new ToDo(id, title, !completed));
 

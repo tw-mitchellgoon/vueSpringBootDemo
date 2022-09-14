@@ -28,7 +28,7 @@ public interface ToDoRepository extends JpaRepository<ToDo, Integer> {
 
     @Transactional
     @Modifying
-    @Query(nativeQuery = true, value = "UPDATE todolist SET completed values :completed WHERE id=:id")
+    @Query(nativeQuery = true, value = "UPDATE todolist SET completed=:completed WHERE id=:id")
     Integer ToDoChangeCompletedStatus(@Param("id") Integer id, @Param("completed") Boolean completed);
 
 }

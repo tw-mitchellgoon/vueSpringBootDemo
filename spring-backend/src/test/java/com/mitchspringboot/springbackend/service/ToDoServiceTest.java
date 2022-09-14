@@ -47,9 +47,9 @@ public class ToDoServiceTest {
         when(toDoRepository.GetToDoById(eq(id))).thenReturn(mockToDo);
 
         ToDo toDoItem = toDoService.getToDoById(id);
-        assertEquals(id, mockToDo.getId());
-        assertEquals(title, mockToDo.getTitle());
-        assertEquals(completed, mockToDo.getCompleted());
+        assertEquals(id, toDoItem.getId());
+        assertEquals(title, toDoItem.getTitle());
+        assertEquals(completed, toDoItem.getCompleted());
     }
 
     @Test

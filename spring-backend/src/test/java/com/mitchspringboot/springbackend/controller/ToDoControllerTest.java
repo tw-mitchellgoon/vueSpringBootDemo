@@ -71,6 +71,7 @@ public class ToDoControllerTest {
         when(toDoService.addToDo(eq(title), eq(completed))).thenReturn(toDoItem);
         mockMvc.perform(post(TODO_REQUEST_PREFIX + "todoadd/").content(toDoAddRequestJson)
                 .contentType(MediaType.APPLICATION_JSON)).andExpect(status().isCreated());
+        verify(toDoService).addToDo(title, completed);
     }
 
     @Test
@@ -78,6 +79,7 @@ public class ToDoControllerTest {
         when(toDoService.getToDoById(eq(id))).thenReturn(toDoItem);
         mockMvc.perform(get(TODO_REQUEST_PREFIX + "todoitem/" + id).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
+        verify(toDoService).getToDoById(id);
     }
 
     // @Test

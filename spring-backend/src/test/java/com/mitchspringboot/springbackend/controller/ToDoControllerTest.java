@@ -27,12 +27,17 @@ public class ToDoControllerTest {
 
     public static final String TODO_REQUEST_PREFIX = "/api/";
 
-    public static final String TODO_REQUEST_BODY = """
+    public static final String TODO_ADD_REQUEST_BODY = """
             {
                 "title": "%s"
             }
             """;
 
+    public static final String TODO_GET_ONE_REQUEST_BODY = """
+            {
+                "id": "%s"
+            }
+            """;
     private final Integer id = (int) Math.random() * 100;
     private final String title = "Task " + id;
     private final Boolean completed = false;
@@ -68,7 +73,7 @@ public class ToDoControllerTest {
 
     @Test
     public void shouldAddToDoItem() throws Exception {
-        String toDoAddRequestJson = String.format(TODO_REQUEST_BODY, title, completed);
+        String toDoAddRequestJson = String.format(TODO_ADD_REQUEST_BODY, title, completed);
         when(toDoService.addToDo(eq(title), eq(completed))).thenReturn(toDoItem);
         mockMvc.perform(post(TODO_REQUEST_PREFIX + "todoadd/").content(toDoAddRequestJson)
                 .contentType(MediaType.APPLICATION_JSON)).andExpect(status().isCreated());
@@ -79,10 +84,9 @@ public class ToDoControllerTest {
     // TODO get one todo item test
     @Test
     public void shouldGetOneToDoItem() throws Exception {
-        String toDoGetOneItemRequestJson = String.format(TODO_REQUEST_BODY, id);
         when(toDoService.getToDoById(eq(id))).thenReturn(toDoItem);
-        mockMvc.perform(get(TODO_REQUEST_PREFIX + "todoitem/").content(toDoGetOneItemRequestJson)
-                .contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
+        mockMvc.perform(get(TODO_REQUEST_PREFIX + "todoitem/" + id).contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
         verify(toDoService).getToDoById(id);
     }
 
@@ -91,7 +95,7 @@ public class ToDoControllerTest {
     // // TODO
     // // format Update request
     // ToDo updatedToDo = new ToDo(id, title, !completed);
-    // String toDoEditRequestJson = String.format(TODO_REQUEST_BODY, id);
+    // String toDoEditRequestJson = String.format(TODO_ADD_REQUEST_BODY, id);
     // // mock toDoService.changeCompletedStatus()
     // //
     // when(toDoService.changeCompletedStatus(eq(toDoItem))).thenReturn(updatedToDo);

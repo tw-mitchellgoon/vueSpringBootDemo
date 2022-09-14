@@ -8,7 +8,9 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -38,4 +40,15 @@ public class ToDoController {
         return new ResponseEntity<ToDo>(newToDo, HttpStatus.CREATED);
     }
 
+    @GetMapping("/todoitem/{id}")
+    public ToDo getToDoById(@PathVariable Integer id) throws Exception {
+        return toDoService.getToDoById(id);
+    }
+
+    // @PutMapping("/todoupdate")
+    // public ResponseEntity<ToDo> updateToDo(@RequestBody ToDo toDoToUpdate) throws
+    // Exception {
+    // ToDo updatedToDo = toDoService.changeCompletedStatus(toDoToUpdate);
+    // return new ResponseEntity<ToDo>(updatedToDo, HttpStatus.OK);
+    // }
 }

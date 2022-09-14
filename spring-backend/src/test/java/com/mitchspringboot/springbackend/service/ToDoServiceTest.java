@@ -43,6 +43,16 @@ public class ToDoServiceTest {
     }
 
     @Test
+    public void shouldGetOneToDoItemById() {
+        when(toDoRepository.GetToDoById(eq(id))).thenReturn(mockToDo);
+
+        ToDo toDoItem = toDoService.getToDoById(id);
+        assertEquals(id, mockToDo.getId());
+        assertEquals(title, mockToDo.getTitle());
+        assertEquals(completed, mockToDo.getCompleted());
+    }
+
+    @Test
     public void shouldCreateNewToDoItem() {
         when(toDoRepository.ToDoAdd(eq(title), eq(completed))).thenReturn(null);
 

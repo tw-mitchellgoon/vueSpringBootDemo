@@ -33,4 +33,8 @@ public class ToDoService {
         return toDoRepository.ToDoList();
     }
 
+    public ToDo getToDoById(Integer id) {
+        return toDoRepository.GetToDoById(id);
+    }
+
 }

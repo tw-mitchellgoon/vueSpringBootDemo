@@ -32,12 +32,6 @@ public class ToDoControllerTest {
                 "title": "%s"
             }
             """;
-
-    public static final String TODO_GET_ONE_REQUEST_BODY = """
-            {
-                "id": "%s"
-            }
-            """;
     private final Integer id = (int) Math.random() * 100;
     private final String title = "Task " + id;
     private final Boolean completed = false;
@@ -77,17 +71,13 @@ public class ToDoControllerTest {
         when(toDoService.addToDo(eq(title), eq(completed))).thenReturn(toDoItem);
         mockMvc.perform(post(TODO_REQUEST_PREFIX + "todoadd/").content(toDoAddRequestJson)
                 .contentType(MediaType.APPLICATION_JSON)).andExpect(status().isCreated());
-
-        verify(toDoService).addToDo(title, completed);
     }
 
-    // TODO get one todo item test
     @Test
     public void shouldGetOneToDoItem() throws Exception {
         when(toDoService.getToDoById(eq(id))).thenReturn(toDoItem);
         mockMvc.perform(get(TODO_REQUEST_PREFIX + "todoitem/" + id).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
-        verify(toDoService).getToDoById(id);
     }
 
     // @Test

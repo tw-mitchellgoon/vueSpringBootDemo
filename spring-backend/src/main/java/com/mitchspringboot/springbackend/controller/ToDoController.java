@@ -34,8 +34,10 @@ public class ToDoController {
     }
 
     @PostMapping(path = "/todoadd", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ToDo> addToDo(@RequestBody ToDo newToDo) throws Exception {
-        toDoService.addToDo(newToDo.getTitle(), false);
+    public ResponseEntity<ToDo> addToDo(@RequestBody ToDo toDo) throws Exception {
+        toDoService.addToDo(toDo.getTitle(), false);
+        List<ToDo> allToDo = toDoService.getAllToDo();
+        ToDo newToDo = allToDo.get(allToDo.size() - 1);
         return new ResponseEntity<ToDo>(newToDo, HttpStatus.CREATED);
     }
 

@@ -58,7 +58,6 @@ public class ToDoServiceTest {
 
         ToDo actualToDo = toDoService.addToDo(title, completed);
 
-        System.out.println(List.of(mockToDo.getId(), mockToDo.getTitle(), mockToDo.getCompleted()));
         assertNotNull(mockToDo.getId());
         assertEquals(mockToDo.getTitle(), actualToDo.getTitle());
         assertEquals(mockToDo.getCompleted(), actualToDo.getCompleted());

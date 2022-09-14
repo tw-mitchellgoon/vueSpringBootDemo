@@ -68,8 +68,12 @@ public class ToDoControllerTest {
     public void shouldAddToDoItem() throws Exception {
         String toDoAddRequestJson = String.format(TODO_ADD_REQUEST_BODY, title, completed);
         when(toDoService.addToDo(eq(title), eq(completed))).thenReturn(toDoItem);
+        when(toDoService.getAllToDo()).thenReturn(List.of(toDoItem));
         mockMvc.perform(post(TODO_REQUEST_PREFIX + "todoadd/").content(toDoAddRequestJson)
-                .contentType(MediaType.APPLICATION_JSON)).andExpect(status().isCreated());
+                .contentType(MediaType.APPLICATION_JSON)).andExpect(status().isCreated())
+                .andExpect(jsonPath("$.id").isNumber())
+                .andExpect(jsonPath("$.title").value(title))
+                .andExpect(jsonPath("$.completed").value(completed));
         verify(toDoService).addToDo(title, completed);
     }
 

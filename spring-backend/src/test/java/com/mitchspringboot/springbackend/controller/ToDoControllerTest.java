@@ -12,7 +12,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import com.mitchspringboot.springbackend.model.ToDo;
 import com.mitchspringboot.springbackend.service.ToDoService;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -78,25 +77,23 @@ public class ToDoControllerTest {
     public void shouldGetOneToDoItem() throws Exception {
         when(toDoService.getToDoById(eq(id))).thenReturn(toDoItem);
         mockMvc.perform(get(TODO_REQUEST_PREFIX + "todoitem/" + id).contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(id))
+                .andExpect(jsonPath("$.title").value(title))
+                .andExpect(jsonPath("$.completed").value(completed));
         verify(toDoService).getToDoById(id);
     }
 
-    // @Test
-    // public void shouldChangeStatusWhenCompletedIsChanged() throws Exception {
-    // // TODO
-    // // format Update request
-    // ToDo updatedToDo = new ToDo(id, title, !completed);
-    // String toDoEditRequestJson = String.format(TODO_ADD_REQUEST_BODY, id);
-    // // mock toDoService.changeCompletedStatus()
-    // //
-    // when(toDoService.changeCompletedStatus(eq(toDoItem))).thenReturn(updatedToDo);
-    // // perform mockMvc
-    // mockMvc.perform(put(TODO_REQUEST_PREFIX +
-    // "todoupdate/").content(toDoEditRequestJson)
-    // .contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
-    // // verify
-    // verify(toDoService).changeCompletedStatus(toDoItem);
-    // assertEquals(expected, actual);
-    // }
+    @Test
+    public void shouldChangeStatusWhenCompletedIsChanged() throws Exception {
+        ToDo updatedToDo = new ToDo(id, title, !completed);
+        when(toDoService.changeCompletedStatus(eq(id))).thenReturn(updatedToDo);
+        mockMvc.perform(get(TODO_REQUEST_PREFIX +
+                "todoupdate/" +
+                id).contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(id))
+                .andExpect(jsonPath("$.completed").value(!completed));
+        // verify
+        verify(toDoService).changeCompletedStatus(id);
+    }
 }

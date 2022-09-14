@@ -45,10 +45,8 @@ public class ToDoController {
         return toDoService.getToDoById(id);
     }
 
-    // @PutMapping("/todoupdate")
-    // public ResponseEntity<ToDo> updateToDo(@RequestBody ToDo toDoToUpdate) throws
-    // Exception {
-    // ToDo updatedToDo = toDoService.changeCompletedStatus(toDoToUpdate);
-    // return new ResponseEntity<ToDo>(updatedToDo, HttpStatus.OK);
-    // }
+    @GetMapping("/todoupdate/{id}")
+    public ToDo updateToDo(@PathVariable Integer id) throws Exception {
+        return toDoService.changeCompletedStatus(id);
+    }
 }

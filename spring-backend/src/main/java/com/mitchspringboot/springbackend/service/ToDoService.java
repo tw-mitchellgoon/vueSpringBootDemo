@@ -27,7 +27,9 @@ public class ToDoService {
         ToDo toDoToUpdate = toDoRepository.GetToDoById(id);
         toDoRepository.ToDoChangeCompletedStatus(toDoToUpdate.getId(),
                 !toDoToUpdate.getCompleted());
-        toDoToUpdate = toDoRepository.GetToDoById(id);
+        // TODO
+        // Need to fix, updated getCompleted() is not getting reflected here?
+        System.out.println(toDoToUpdate.getCompleted());
         return toDoToUpdate;
     }
 

@@ -92,12 +92,11 @@ public class ToDoControllerTest {
     public void shouldChangeStatusWhenCompletedIsChanged() throws Exception {
         ToDo updatedToDo = new ToDo(id, title, !completed);
         when(toDoService.changeCompletedStatus(eq(id))).thenReturn(updatedToDo);
-        mockMvc.perform(get(TODO_REQUEST_PREFIX +
+        mockMvc.perform(patch(TODO_REQUEST_PREFIX +
                 "todoupdate/" +
                 id).contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(id))
                 .andExpect(jsonPath("$.completed").value(!completed));
-        // verify
         verify(toDoService).changeCompletedStatus(id);
     }
 }

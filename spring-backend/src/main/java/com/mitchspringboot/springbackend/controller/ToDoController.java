@@ -8,6 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -46,7 +47,7 @@ public class ToDoController {
         return toDoService.getToDoById(id);
     }
 
-    @GetMapping("/todoupdate/{id}")
+    @PatchMapping("/todoupdate/{id}")
     public ToDo updateToDo(@PathVariable Integer id) throws Exception {
         return toDoService.changeCompletedStatus(id);
     }

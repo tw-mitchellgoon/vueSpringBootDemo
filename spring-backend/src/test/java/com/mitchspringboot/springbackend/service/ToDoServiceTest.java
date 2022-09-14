@@ -69,7 +69,7 @@ public class ToDoServiceTest {
         when(toDoRepository.ToDoChangeCompletedStatus(eq(id), eq(completed))).thenReturn(null);
         when(toDoRepository.GetToDoById(eq(id))).thenReturn(new ToDo(id, title, !completed));
 
-        ToDo updatedToDo = toDoService.changeCompletedStatus(mockToDo);
+        ToDo updatedToDo = toDoService.changeCompletedStatus(id);
 
         assertEquals(!mockToDo.getCompleted(), updatedToDo.getCompleted());
 

@@ -19,7 +19,8 @@ import com.mitchspringboot.springbackend.model.ToDo;
 import com.mitchspringboot.springbackend.service.ToDoService;
 
 @RestController
-@CrossOrigin(origins = "${spring.frontendUrl}")
+// @CrossOrigin(origins = "${spring.frontendUrl}")
+@CrossOrigin(origins = "*")
 @RequestMapping("/api")
 public class ToDoController {
     @Autowired
@@ -47,7 +48,7 @@ public class ToDoController {
         return toDoService.getToDoById(id);
     }
 
-    @PatchMapping("/todoupdate/{id}")
+    @GetMapping("/todoupdate/{id}")
     public ToDo updateToDo(@PathVariable Integer id) throws Exception {
         return toDoService.changeCompletedStatus(id);
     }

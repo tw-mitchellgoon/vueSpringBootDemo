@@ -20,5 +20,11 @@ export const toDoList = {
       const post = await ToDoService.addToDo(toDoItem);
       ctx.commit("setToDoList", post);
     },
+    async updateItem(ctx, toDoId) {
+      const update = await ToDoService.updateToDo(
+        toDoId.id
+      );
+      ctx.commit("setToDoList", update);
+    },
   },
 };

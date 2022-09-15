@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve --mode=production --port 8080",
-    "serve-local": "vue-cli-service --mode=local serve --port 8080",
+    "serve-local": "vue-cli-service serve --mode=local --port 8080",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },

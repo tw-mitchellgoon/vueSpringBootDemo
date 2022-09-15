@@ -18,6 +18,16 @@ class ToDoService {
       )
       .catch((err) => console.log(err));
   }
+
+  updateToDo(toDoId) {
+    return axios
+      .get(`${apiBaseUrl}todoupdate/${toDoId}`)
+      .then((res) => {
+        console.log(
+          `Task updated, Status returned: id: ${res.data.id}, ${res.data.title}, ${res.data.completed}`
+        );
+      });
+  }
 }
 
 export default new ToDoService();

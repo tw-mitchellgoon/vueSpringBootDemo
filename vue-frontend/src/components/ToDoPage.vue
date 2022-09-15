@@ -12,6 +12,8 @@
           <input
             type="checkbox"
             :checked="item.completed"
+            :onclick="toggleCompleted"
+            :id="item.id"
           />
         </template>
       </ToDoItem>
@@ -43,12 +45,14 @@ export default {
   setup() {
     const store = useStore();
     const taskInput = ref("");
+
     onMounted(() => {
       store.dispatch("toDoList/fetch");
     });
     const toDoList = computed(() => {
       return store.state.toDoList.all;
     });
+
     const addItem = (e) => {
       store.dispatch("toDoList/addItem", {
         title: e.target.taskInput.value,
@@ -59,10 +63,20 @@ export default {
       }, 100);
     };
 
+    const toggleCompleted = (e) => {
+      store.dispatch("toDoList/updateItem", {
+        id: e.target.getAttribute("id"),
+      });
+      setTimeout(() => {
+        store.dispatch("toDoList/fetch");
+      }, 100);
+    };
+
     return {
       toDoList,
       addItem,
       taskInput,
+      toggleCompleted,
     };
   },
 };
